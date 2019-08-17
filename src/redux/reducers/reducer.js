@@ -6,10 +6,7 @@ export const Reducer = (state = [], action) =>
         case 'ADD': {
             return [
                 ...state,
-                {
-                    id: action.id,
-                    text: action.text
-                }
+                action.data
             ]
         }
         default: return state;

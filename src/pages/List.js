@@ -29,7 +29,7 @@ class Todo extends React.Component
                 </ul>
                 <div>
                     <ul>
-                        {/* {this.props} */}
+                        {this.props.input.map((item, index) => <li key={index}>{item}</li>)}
                     </ul>
                 </div>
             </div>
@@ -47,7 +47,7 @@ const mapStateToProps = state =>
 const mapDispatchToProps = dispatch =>
 {
     return {
-        onAdd: () => dispatch({ type: "ADD" })
+        onAdd: () => dispatch({ type: "ADD", data })
     }
 };
 

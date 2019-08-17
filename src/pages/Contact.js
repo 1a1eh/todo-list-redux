@@ -11,17 +11,9 @@ class Contact extends React.Component
             <div>
                 <h1>Contact</h1>
                 <ul>
-                    <li>
-                        <Link to="/about">
-                            About
-                    </Link>
-                    </li>
+                    <li><Link to="/about">About</Link></li>
                     <li><Link to="/contact">Contact</Link></li>
-                    <li>
-                        <Link to="/todo">
-                            Todo
-                    </Link>
-                    </li>
+                    <li><Link to="/todo">Todo</Link></li>
                 </ul>
                 <h3>Counter: {counter}</h3>
                 <button onClick={onMinus}>Minus</button>

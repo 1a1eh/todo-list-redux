@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 
 class Todo extends React.Component
 {
+    state = {
+        input: ""
+    }
     render ()
     {
         const { onAdd } = this.props;
@@ -11,17 +14,9 @@ class Todo extends React.Component
             <div>
                 <h1>Todo List</h1>
                 <ul>
-                    <li>
-                        <Link to="/about">
-                            About
-                    </Link>
-                    </li>
+                    <li><Link to="/about">About</Link></li>
                     <li><Link to="/contact">Contact</Link></li>
-                    <li>
-                        <Link to="/todo">
-                            Todo
-                    </Link>
-                    </li>
+                    <li><Link to="/todo">Todo</Link></li>
                 </ul>
                 <input onChange={e => this.setState({ input: e.target.value })} />
                 <button onClick={onAdd}>Add</button>
@@ -40,7 +35,7 @@ const mapStateToProps = state =>
 const mapDispatchToProps = dispatch =>
 {
     return {
-        onAdd: () => dispatch({ type: "ADD" })
+        onAdd: () => dispatch({ type: "ADD", data: Todo() })
     }
 };
 
