@@ -1,25 +1,31 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+// import { todos } from '../redux/reducers/reducer';
 class Todo extends React.Component
 {
-    state = {
-        input: ""
-    }
     render ()
     {
+        console.log(this.props)
         const { onAdd } = this.props;
         return (
             <div>
                 <h1>Todo List</h1>
+                <input ref={e => this.input = e} />
+                <button onClick={() =>
+                {
+                    this.props.dispatch({
+                        type: "ADD",
+                        text: this.input.value
+                    });
+                    this.input.value = '';
+                }
+                }>Add</button>
                 <ul>
-                    <li><Link to="/about">About</Link></li>
-                    <li><Link to="/contact">Contact</Link></li>
-                    <li><Link to="/todo">Todo</Link></li>
+                    {this.props.todos.map((item, index) =>
+                    {
+                        return <li key={index}>{item.text}</li>
+                    })}
                 </ul>
-                <input onChange={e => this.setState({ input: e.target.value })} />
-                <button onClick={onAdd}>Add</button>
             </div>
         )
     }
@@ -29,7 +35,7 @@ class Todo extends React.Component
 const mapStateToProps = state =>
 {
     return {
-        input: state.Reducer.input
+        todos: state.todos
     }
 };
 const mapDispatchToProps = dispatch =>
@@ -39,4 +45,4 @@ const mapDispatchToProps = dispatch =>
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Todo);
+export default connect(mapStateToProps)(Todo);
