@@ -1,4 +1,4 @@
-import { ADD, TOGGLE } from '../action-types/index';
+import { ADD, TOGGLE, DELETE } from '../action-types/index';
 
 export const todos = (state = [], action) =>
 {
@@ -22,6 +22,10 @@ export const todos = (state = [], action) =>
                 ...todo,
                 completed: !action.completed
             }
+        });
+        case DELETE: return state.filter((todo) =>
+        {
+            return todo.id !== action.id
         });
         default: return state;
     }

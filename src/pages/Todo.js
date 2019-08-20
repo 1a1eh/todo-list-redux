@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AddAction, ToggleAction } from '../redux/action-creators/index';
+import { AddAction, ToggleAction, DeleteAction } from '../redux/action-creators/index';
 
 class Todo extends React.Component
 {
     render ()
     {
-        const { onAdd, todos, onToggle } = this.props;
+        const { onAdd, todos, onToggle, onDelete } = this.props;
+        console.log(this.props.todos)
         return (
             <div>
                 <h1>Todo List</h1>
@@ -18,7 +19,11 @@ class Todo extends React.Component
                 <ul>
                     {todos.map((item) =>
                     {
-                        return <li key={item.id} onClick={() => onToggle(item.completed, item.id)} style={{ textDecoration: item.completed ? "line-through" : "none" }}>{item.text}</li>
+                        return (
+                            <li key={item.id} onClick={() => onToggle(item.completed, item.id)} style={{ textDecoration: item.completed ? "line-through" : "none" }}>{item.text}
+                                <button onClick={() => onDelete(item.id)}>Delete</button>
+                            </li>
+                        )
                     })}
                 </ul>
             </div>
@@ -37,7 +42,8 @@ const mapDispatchToProps = dispatch =>
 {
     return {
         onAdd: (text) => dispatch(AddAction(text)),
-        onToggle: (completed, id) => dispatch(ToggleAction(completed, id))
+        onToggle: (completed, id) => dispatch(ToggleAction(completed, id)),
+        onDelete: (id) => dispatch(DeleteAction(id))
     }
 };
 

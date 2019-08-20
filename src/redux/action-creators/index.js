@@ -1,4 +1,4 @@
-import { ADD, TOGGLE } from '../action-types/index';
+import { ADD, TOGGLE, DELETE } from '../action-types/index';
 let nextTodoId = new Date().getTime();
 
 export const AddAction = text => ({
@@ -12,3 +12,8 @@ export const ToggleAction = (completed,id) => ({
   id,
   completed
 });
+
+export const DeleteAction = id => ({
+  type: DELETE,
+  id: id
+})
