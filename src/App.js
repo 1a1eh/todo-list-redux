@@ -6,7 +6,7 @@ import Todo from './pages/Todo';
 export const App = () =>
 {
     return (
-        <div style={{textAlign: "center"}}>
+        <div>
             <Router>
                 <Route path="/" exact component={Dashboard} />
                 <Route path="/todo"  component={Todo} />                

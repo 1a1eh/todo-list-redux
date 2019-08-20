@@ -1,29 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { todos } from '../redux/reducers/reducer';
 class Todo extends React.Component
 {
     render ()
     {
-        console.log(this.props)
-        const { onAdd } = this.props;
+        const { onAdd, todos, onToggle } = this.props;
+        console.log(this.props.todos);
+
         return (
             <div>
                 <h1>Todo List</h1>
                 <input ref={e => this.input = e} />
                 <button onClick={() =>
                 {
-                    this.props.dispatch({
-                        type: "ADD",
-                        text: this.input.value
-                    });
-                    this.input.value = '';
-                }
-                }>Add</button>
+                    let todoId = new Date().getTime();
+                    onAdd(this.input.value, todoId); this.input.value = "";
+                }}>Add</button>
                 <ul>
-                    {this.props.todos.map((item, index) =>
+                    {todos.map((item) =>
                     {
-                        return <li key={index}>{item.text}</li>
+                        return <li key={item.id} onClick={() => onToggle(item.completed, item.id)} style={{textDecoration: item.completed ? "line-through": "none"}}>{item.text}</li>
                     })}
                 </ul>
             </div>
@@ -41,8 +37,9 @@ const mapStateToProps = state =>
 const mapDispatchToProps = dispatch =>
 {
     return {
-        onAdd: () => dispatch({ type: "ADD", data: Todo() })
+        onAdd: (text,id) => dispatch({ type: "ADD", text, id}),
+        onToggle: (completed,id) => dispatch({type: "TOGGLE", completed, id})
     }
 };
 
-export default connect(mapStateToProps)(Todo);
+export default connect(mapStateToProps, mapDispatchToProps)(Todo);
