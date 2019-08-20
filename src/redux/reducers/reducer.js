@@ -1,9 +1,10 @@
+import { ADD, TOGGLE } from '../action-types/index';
 
 export const todos = (state = [], action) =>
 {
     switch (action.type)
     {
-        case "ADD": return [
+        case ADD: return [
             ...state,
             {
                 text: action.text,
@@ -11,7 +12,7 @@ export const todos = (state = [], action) =>
                 completed: false
             }
         ];
-        case "TOGGLE": return state.map((todo) =>
+        case TOGGLE: return state.map((todo) =>
         {
             if (todo.id !== action.id)
             {
