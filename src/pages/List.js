@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardBody, CardTitle, CardText, Badge, Button } from 'reactstrap';
+import { DeleteAction } from '../redux/action-creators/index';
 
 class List extends React.Component
 {
     render ()
     {
         const { data, onDelete } = this.props;
+        console.log(data)
         return (
             <div>
                 {data && data.length > 0 && <div style={{ margin: "100px", width: "700px" }}>
@@ -32,20 +34,13 @@ class List extends React.Component
 const mapStateToProps = state =>
 {
     return {
-        data: state
+        data: state.AddListReducer
     }
 };
 const mapDispatchToProps = dispatch =>
 {
     return {
-        onDelete: (id, data) =>
-        {
-            let filteredData = data.filter(item =>
-            {
-                return item.id !== id
-            })
-            return dispatch({ type: "DELETE", data: filteredData })
-        }
+        onDelete: (id, data) => dispatch(DeleteAction(id, data))
     }
 };
 

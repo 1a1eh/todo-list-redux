@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardBody, CardHeader, Button, CardText } from 'reactstrap';
+import { AddAction } from '../redux/action-creators';
 
 class Add extends React.Component
 {
@@ -32,7 +33,7 @@ class Add extends React.Component
 const mapDispatchToProps = dispatch =>
 {
     return {
-        onAdd: (title, body, id) => dispatch({ type: "ADD",title, body, id })
+        onAdd: (title, body, id) => dispatch(AddAction(title,body,id))
     }
 };
 
