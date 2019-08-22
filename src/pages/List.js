@@ -10,8 +10,8 @@ class List extends React.Component
         const { data, onDelete } = this.props;
         console.log(data)
         return (
-            <div>
-                {data && data.length > 0 && <div style={{ margin: "100px", width: "700px" }}>
+            <div style={{ margin: "100px auto", width: "700px" }}>
+                {data && data.length > 0 && <div>
                     <h1><Badge color="secondary">Count: {data.length}</Badge></h1>
                     {data.map((item) =>
                     {

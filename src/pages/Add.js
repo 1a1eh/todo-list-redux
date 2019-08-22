@@ -9,7 +9,7 @@ class Add extends React.Component
     {
         let initId = new Date().getTime();
         return (
-            <div style={{ margin: "100px", width: "500px", backgroundColor: "gray" }}>
+            <div style={{ margin: "100px auto", width: "500px", backgroundColor: "gray" }}>
                 <Card color="success">
                     <CardHeader>
                         <input ref={e => this.title = e} />
