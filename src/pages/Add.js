@@ -1,40 +1,45 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, CardBody, CardHeader, Button, CardText } from 'reactstrap';
-import { AddAction } from '../redux/action-creators';
+import { Card, Button, CardHeader, CardBody, CardText } from 'reactstrap';
+import { addTodoAction } from '../redux/action-creators/index';
 
-class Add extends React.Component
-{
-    render ()
-    {
-        let initId = new Date().getTime();
-        return (
-            <div style={{ margin: "100px auto", textAlign: "center", width: "500px", backgroundColor: "gray" }}>
-                <Card color="success">
-                    <CardHeader>
-                        <input ref={e => this.title = e} />
-                    </CardHeader>
-                    <CardBody>
-                        <CardText>
-                            <input ref={e => this.body = e} />
-                        </CardText>
-                        <Button onClick={() =>
-                        {
-                            this.props.onAdd(this.title.value, this.body.value, ++initId);
-                            this.props.history.push("/list");
-                        }}>Save</Button>
-                    </CardBody>
-                </Card>
-            </div>
-        );
-    };
+class Add extends React.Component {
+	render() {
+		const { onAdd } = this.props;
+		let initId = new Date().getTime();
+		return (
+			<div style={{ margin: '50px auto', textAlign: 'center', width: '500px' }}>
+				<Card>
+					<CardHeader>Write Note</CardHeader>
+					<CardBody>
+						<CardText>
+							<input ref={(e) => (this.input = e)} />
+						</CardText>
+						<Button
+							onClick={() => {
+								onAdd(this.input.value, ++initId);
+								this.input.value = '';
+							}}
+						>
+							+ Add
+						</Button>
+					</CardBody>
+				</Card>
+			</div>
+		);
+	}
+}
+
+const mapStateToProps = (state) => {
+	return {
+		todos: state
+	};
 };
 
-const mapDispatchToProps = dispatch =>
-{
-    return {
-        onAdd: (title, body, id) => dispatch(AddAction(title,body,id))
-    }
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onAdd: (text, id) => dispatch(addTodoAction(text, id))
+	};
 };
 
-export default connect(null, mapDispatchToProps)(Add);
+export default connect(mapStateToProps, mapDispatchToProps)(Add);

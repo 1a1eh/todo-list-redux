@@ -1,47 +1,70 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, CardBody, CardTitle, CardText, Badge, Button } from 'reactstrap';
-import { DeleteAction } from '../redux/action-creators/index';
+import { Card, CardHeader, CardBody } from 'reactstrap';
+import Item from './Item';
+import { toggleAction, deleteAction } from '../redux/action-creators/index';
 
-class List extends React.Component
-{
-    render ()
-    {
-        const { data, onDelete } = this.props;
-        console.log(data)
-        return (
-            <div style={{ margin: "100px auto", width: "700px" }}>
-                {data && data.length > 0 && <div>
-                    <h1><Badge color="secondary">Count: {data.length}</Badge></h1>
-                    {data.map((item) =>
-                    {
-                        return (
-                            <Card color="primary" key={item.id}>
-                                <CardBody>
-                                    <CardTitle>{item.title}</CardTitle>
-                                    <CardText>{item.body}</CardText>
-                                    <Button onClick={() => onDelete(item.id, data)} className="float-right" color="secondary">Delete</Button>
-                                </CardBody>
-                            </Card>
-                        );
-                    })}
-                </div>}
-            </div>
-        );
-    };
+class List extends React.Component {
+	toggle = (item) => {
+		const { list } = this.props;
+		let data = list.map((it) => {
+			if (it.id === item.id) {
+				return {
+					...it,
+					completed: !it.completed
+				};
+			}
+			return it;
+		});
+		this.props.onToggle(data);
+	};
+
+	delete = (id) => {
+		const { list } = this.props;
+		let data = list.filter((item) => {
+			return item.id !== id;
+		});
+		this.props.onDelete(data);
+		console.log(data);
+	};
+
+	render() {
+		const { list } = this.props;
+		return (
+			<div>
+				{list &&
+				list.length > 0 && (
+					<Card>
+						<CardHeader>List</CardHeader>
+						<CardBody>
+							<ul>
+								{list.map((todo, index) => (
+									<Item
+										key={index}
+										todo={todo}
+										onDelete={() => this.delete(todo.id)}
+									/>
+								))}
+							</ul>
+						</CardBody>
+					</Card>
+				)}
+			</div>
+		);
+	}
+}
+
+const mapStateToProps = (state) => {
+	return {
+		list: state.addTodoReducer
+	};
 };
 
-const mapStateToProps = state =>
-{
-    return {
-        data: state.AddListReducer
-    }
-};
-const mapDispatchToProps = dispatch =>
-{
-    return {
-        onDelete: (id, data) => dispatch(DeleteAction(id, data))
-    }
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onToggle: (data) => dispatch(toggleAction(data)),
+		onDelete: (data) => dispatch(deleteAction(data))
+	};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(List);

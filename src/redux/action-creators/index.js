@@ -1,21 +1,23 @@
-import { ADD, DELETE } from '../action-types/index';
+import { ADD, TOGGLE, DELETE } from '../action-types/index';
 
-export const AddAction = (title, body, id) =>
-{
-    return {
-        type: ADD,
-        payload: { title, id, body }
-    }
-}
+export const addTodoAction = (text, id) => {
+	return {
+		type: ADD,
+		text,
+		id
+	};
+};
 
-export const DeleteAction = (id, data) =>
-{
-    let filteredData = data.filter(item =>
-    {
-        return item.id !== id
-    })
-    return {
-        type: DELETE,
-        data: filteredData
-    }
-}
+export const toggleAction = (data) => {
+	return {
+		type: TOGGLE,
+		data
+	};
+};
+
+export const deleteAction = (data) => {
+	return {
+		type: DELETE,
+		data
+	};
+};
