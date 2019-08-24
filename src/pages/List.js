@@ -39,11 +39,7 @@ class List extends React.Component {
 						<CardBody>
 							<ul>
 								{list.map((todo, index) => (
-									<Item
-										key={index}
-										todo={todo}
-										onDelete={() => this.delete(todo.id)}
-									/>
+									<Item key={index} todo={todo} onDelete={() => this.delete(todo.id)} />
 								))}
 							</ul>
 						</CardBody>
