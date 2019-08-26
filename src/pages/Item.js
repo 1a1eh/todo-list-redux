@@ -9,7 +9,7 @@ function Item(props) {
         style={{ textDecoration: props.todo.completed ? "line-through" : "none" }}
       >
         {props.todo.text}
-        <Button onClick={props.onDelete} color="danger" size="sm">
+        <Button style={{marginLeft: "20px"}} onClick={props.onDelete} color="danger" size="sm">
 			Delete
 		</Button>
       </li>

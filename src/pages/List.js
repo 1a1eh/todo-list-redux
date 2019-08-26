@@ -4,38 +4,39 @@ import { Card, CardHeader, CardBody } from 'reactstrap';
 import Item from './Item';
 import { toggleTodoState, deleteTodo } from '../redux/action-creators/index';
 
-class List extends React.Component {
-	render() {
-		const { list, dispatch } = this.props;
-		return (
-			<div>
-				{list &&
-				list.length > 0 && (
-					<Card>
-						<CardHeader>List</CardHeader>
-						<CardBody>
-							<ul>
-								{list.map((todo, index) => (
-									<Item
-										key={index}
-										todo={todo}
-										onToggle={() => dispatch(toggleTodoState(todo.id))}
-										onDelete={() => dispatch(deleteTodo(todo.id))}
-									/>
-								))}
-							</ul>
-						</CardBody>
-					</Card>
-				)}
-			</div>
-		);
-	}
+function List(props) {
+	const { list, onToggle, onDelete } = props;
+	return (
+		<div>
+			{list &&
+			list.length > 0 && (
+				<Card>
+					<CardHeader>List</CardHeader>
+					<CardBody>
+						<ul style={{listStyle: "none"}}>
+							{list.map((todo, index) => (
+								<Item
+									key={index}
+									todo={todo}
+									onToggle={() => onToggle(todo.id)}
+									onDelete={() => onDelete(todo.id)}
+								/>
+							))}
+						</ul>
+					</CardBody>
+				</Card>
+			)}
+		</div>
+	);
 }
 
-const mapStateToProps = (state) => {
-	return {
-		list: state.todos
-	};
-};
+const mapStateToProps = (state) => ({
+	list: state.todos
+});
 
-export default connect(mapStateToProps)(List);
+const mapDispatchToProps = (dispatch) => ({
+	onToggle: (id) => dispatch(toggleTodoState(id)),
+	onDelete: (id) => dispatch(deleteTodo(id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(List);

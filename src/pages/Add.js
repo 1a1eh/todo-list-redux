@@ -4,12 +4,12 @@ import { Card, Button, CardHeader, CardBody, CardText } from 'reactstrap';
 import { addTodo } from '../redux/action-creators/index';
 
 function Add(props) {
-	const [value, setValue] = React.useState('')
-	const onSubmit = e => {
-		e.preventDefault()
-		props.dispatch(addTodo(value));
+	const [ value, setValue ] = React.useState('');
+	const onSubmit = (e) => {
+		e.preventDefault();
+		props.addTodo(value);
 		setValue('');
-	}
+	};
 	// const onKeyDown = e => {
 	// 	console.log(e.target.keyCode)
 	// 	if (e.target.keyCode === 13) {
@@ -23,12 +23,9 @@ function Add(props) {
 				<CardHeader>Write Note</CardHeader>
 				<CardBody>
 					<CardText>
-						<input value={value} onChange={e => setValue(e.target.value)} />
+						<input value={value} onChange={(e) => setValue(e.target.value)} />
 					</CardText>
-					<Button
-						type="submit"
-						onClick={onSubmit}
-					>
+					<Button type="submit" onClick={onSubmit}>
 						+ Add
 					</Button>
 				</CardBody>
@@ -37,11 +34,8 @@ function Add(props) {
 	);
 }
 
-
-const mapStateToProps = (state) => console.log(state) || ({
-	
-		todos: state.todos
-	
+const mapDispatchToProps = (dispatch) => ({
+	addTodo: (value) => dispatch(addTodo(value))
 });
 
-export default connect(mapStateToProps)(Add);
+export default connect(null, mapDispatchToProps)(Add);
