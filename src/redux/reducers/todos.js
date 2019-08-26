@@ -12,18 +12,17 @@ export const todos = (state = [], action) => {
 				}
 			];
 		case TOGGLE:
-			return state.map(todo => {
+			return state.map((todo) => {
 				if (todo.id === action.id) {
 					return {
 						...todo,
 						completed: !todo.completed
-					}
+					};
 				}
-
-				return todo
-			})
+				return todo;
+			});
 		case DELETE:
-			return state.filter(item => item.id !== action.id);
+			return state.filter((item) => item.id !== action.id);
 		default:
 			return state;
 	}

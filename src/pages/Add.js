@@ -7,8 +7,10 @@ function Add(props) {
 	const [ value, setValue ] = React.useState('');
 	const onSubmit = (e) => {
 		e.preventDefault();
-		props.addTodo(value);
-		setValue('');
+		if (value !== "") {
+			props.addTodo(value);
+			setValue('');
+		}
 	};
 	// const onKeyDown = e => {
 	// 	console.log(e.target.keyCode)
@@ -20,7 +22,7 @@ function Add(props) {
 	return (
 		<form style={{ margin: '50px auto', textAlign: 'center', width: '500px' }}>
 			<Card>
-				<CardHeader>Write Note</CardHeader>
+				<CardHeader><h3>Write Note</h3></CardHeader>
 				<CardBody>
 					<CardText>
 						<input value={value} onChange={(e) => setValue(e.target.value)} />

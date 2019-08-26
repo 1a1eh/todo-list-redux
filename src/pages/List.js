@@ -11,9 +11,11 @@ function List(props) {
 			{list &&
 			list.length > 0 && (
 				<Card>
-					<CardHeader>List</CardHeader>
+					<CardHeader>
+						<h3>List</h3>
+					</CardHeader>
 					<CardBody>
-						<ul style={{listStyle: "none"}}>
+						<ul style={{ listStyle: 'none' }}>
 							{list.map((todo, index) => (
 								<Item
 									key={index}
