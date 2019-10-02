@@ -1,17 +1,32 @@
-import React from 'react';
-import Add from './Add';
-import List from './List';
+import React, { useState } from 'react';
+import { Card, CardHeader, CardBody, Button, Input, CardFooter } from 'reactstrap';
+import { connect } from 'react-redux';
+import { addTodo } from '../redux/action-creators/index';
 
-class Home extends React.Component {
-	render() {
-		return (
-			<div style={{ margin: '70px auto', textAlign: 'center', width: '500px' }}>
-				<h1>Todo Laleh</h1>
-				<Add />
-				<List />
-			</div>
-		);
-	}
-}
+const Home = (props) => {
+	const [ value, setValue ] = useState('');
+	return (
+		<Card style={{ width: 500, margin: '100px auto', textAlign: 'center' }}>
+			<CardHeader><h2>Add</h2></CardHeader>
+			<CardBody>
+				<Input value={value} onChange={(e) => setValue(e.target.value)} />
+			</CardBody>
+			<CardFooter>
+				<Button
+					onClick={() => {
+						props.add(value);
+						props.history.push('/list');
+					}}
+				>
+					+ Add Todo
+				</Button>
+			</CardFooter>
+		</Card>
+	);
+};
 
-export default Home;
+const mapDispatchToProps = (dispatch) => ({
+	add: (text) => dispatch(addTodo(text))
+});
+
+export default connect(null, mapDispatchToProps)(Home);

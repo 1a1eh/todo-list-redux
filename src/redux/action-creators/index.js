@@ -1,23 +1,17 @@
-import { ADD, TOGGLE, DELETE } from '../action-types/index';
+import cuid from 'cuid';
+import { ADD, DELETE} from '../action-types';
 
-export const addTodoAction = (text, id) => {
+export const addTodo = (text) => {
 	return {
-		type: ADD,
 		text,
-		id
+		type: ADD,
+		id: cuid()
 	};
 };
 
-export const toggleAction = (data) => {
-	return {
-		type: TOGGLE,
-		data
-	};
-};
-
-export const deleteAction = (data) => {
-	return {
-		type: DELETE,
-		data
-	};
-};
+export const deleteItem = (id) => {
+  return {
+    id,
+    type: DELETE
+  }
+}
