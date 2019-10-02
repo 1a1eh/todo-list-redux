@@ -6,7 +6,7 @@ class Home extends React.Component {
 	render() {
 		return (
 			<div style={{ margin: '70px auto', textAlign: 'center', width: '500px' }}>
-				<h1>Todo List</h1>
+				<h1>Todo Laleh</h1>
 				<Add />
 				<List />
 			</div>
