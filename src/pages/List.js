@@ -1,22 +1,24 @@
 import React from 'react';
 import { Card, CardHeader, CardBody, Button } from 'reactstrap';
 import { connect } from 'react-redux';
-import {deleteItem} from '../redux/action-creators/index';
+import { deleteItem } from '../redux/action-creators/index';
 
 const List = ({ list, onDelete }) => {
 	return (
 		<Card style={{ width: 500, margin: '100px auto', textAlign: 'center' }}>
-			<CardHeader><h2>TodoList</h2></CardHeader>
+			<CardHeader>
+				<h2>Todo List</h2>
+			</CardHeader>
 			<CardBody>
-        <h4>count: {list.length}</h4>
+				<h4>count: {list.length}</h4>
 				<ul>
 					{list.map((item, index) => {
 						return (
-							<li key={index}>
+							<li key={index} style={{margin: 10}}>
 								{item.text}
-								<span style={{marginLeft: '10px'}}>
+								<span style={{ margin: '10px' }}>
 									<Button color="danger" onClick={() => onDelete(item.id)}>
-										Delete
+										- Delete
 									</Button>
 								</span>
 							</li>

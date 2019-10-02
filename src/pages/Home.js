@@ -7,7 +7,9 @@ const Home = (props) => {
 	const [ value, setValue ] = useState('');
 	return (
 		<Card style={{ width: 500, margin: '100px auto', textAlign: 'center' }}>
-			<CardHeader><h2>Add</h2></CardHeader>
+			<CardHeader>
+				<h2>Add</h2>
+			</CardHeader>
 			<CardBody>
 				<Input value={value} onChange={(e) => setValue(e.target.value)} />
 			</CardBody>
@@ -15,7 +17,7 @@ const Home = (props) => {
 				<Button
 					onClick={() => {
 						props.add(value);
-						props.history.push('/list');
+						setValue('');
 					}}
 				>
 					+ Add Todo
